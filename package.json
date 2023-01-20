@@ -1,0 +1,17 @@
+{
+	"name": "nodejswebinar",
+	"version": "1.0.0",
+	"type": "module",
+	"description": "nodejs webinar",
+	"main": "server.js",
+	"author": "asiisii",
+	"license": "MIT",
+	"scripts": {
+		"start": "nodemon server.js"
+	},
+	"dependencies": {
+		"dotenv": "^16.0.3",
+		"express": "^4.18.2",
+		"mongoose": "^6.8.4"
+	}
+}
