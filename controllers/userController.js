@@ -23,8 +23,21 @@ export const getUser = async (req, res, next) => {
 	}
 }
 
+const validateUserInput = async (req, res) => {
+	const existingUser = await User.findOne({
+		$or: [{ userName: req.body.userName }, { email: req.body.email }],
+	})
+	if (existingUser)
+		return res.status(400).json({ message: 'Username or email already exists' })
+	if (req.body.gender !== 'Male' && req.body.gender !== 'Female')
+		return res.status(400).json({ message: 'Invalid gender' })
+	return true
+}
+
 export const createUser = async (req, res, next) => {
 	try {
+    const isValid = await validateUserInput(req, res)
+		if (!isValid) return
 		const newUser = await User.create(req.body)
 		res.status(200)
 		res.setHeader('Content-Type', 'applicaiton/json')
